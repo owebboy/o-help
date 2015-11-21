@@ -10,7 +10,7 @@
 			
 			<h3>New Topic</h3>
 			<form action="/topic/admin/new" method="post">
-				<div class="input-group input-group-lg">
+				<div class="input-group">
 					<input type="text" name="content" class="form-control" placeholder="Topic name...">
 					<span class="input-group-btn">
 						<button class="btn btn-default" type="submit">New Topic</button>
@@ -25,7 +25,7 @@
 				{{#each topic}}
 				<div class="list-group-item">
 					<form action="/topic/admin/update/{{id}}" method="post">
-						<div class="input-group input-group-lg">
+						<div class="input-group">
 							<input type="text" name="content" class="form-control" placeholder="Edit Topic" value="{{topic}}">
 							<span class="input-group-btn">
 								<button class="btn btn-default" type="submit">Update</button>
@@ -48,7 +48,7 @@
 			
 			<h3>New Admin</h3>
 			<form action="/topic/admin/add" method="get">
-				<div class="input-group input-group-lg">
+				<div class="input-group">
 					<input type="text" name="content" class="form-control" placeholder="New Admin's username...">
 					<span class="input-group-btn">
 						<button class="btn btn-default" type="submit">Set as admin</button>
