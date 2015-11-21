@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+  </head>
+  <body style="padding-top: 70px;">
+    <br>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="/">oHelp</a>
+        
+        <div class="navbar-right">
+          {{#unless user}}
+          <a href="/auth/register" class="btn btn-default navbar-btn">Register</a>
+          <a href="/auth/login" class="btn btn-default navbar-btn">Sign in</a>
+          {{else}}
+          <p class="navbar-text"><a href="/auth/logout" class="navbar-link">logout</a></p>
+          {{/unless}}
+        </div>
+      </div>
+    </nav>
+
+    {{{body}}}
+  </body>
+</html>

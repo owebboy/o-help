@@ -1,0 +1,94 @@
+<div class="container">
+	
+	<!-- Question -->
+	<h1>{{topic.topic}}</h1>
+	<br>
+	<ol class="breadcrumb">
+		<li><a href="/">Topics</a></li>
+		<li><a href="/topic/{{topic.id}}">{{topic.topic}}</a></li>
+		<li class="active">{{question.question.content}}</li>
+	</ol>
+	
+	<h1 class="page-header">
+		{{#equal user.id question.question.user.id}}
+		<form action="/question/edit/{{question.id}}" method="post">
+			<div class="input-group input-group-lg">
+				<input type="text" name="content" class="form-control" placeholder="Edit Question" value="{{question.question.content}}">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="submit">Update</button>
+					<a class="btn btn-default" href="/question/delete/{{question.id}}"><span class="glyphicon glyphicon-remove"></span></a>
+				</span>
+			</div>
+		</form>
+		{{else}}
+		{{question.question.content}}
+		<small>{{user.username}}</small>
+		{{/equal}}
+	</h1>
+	
+	<!-- Answers -->
+	
+	{{#if user}}
+	<form action="/question/answer/{{question.id}}" method="post">
+		<div class="input-group input-group-lg">
+			<input type="text" name="content" class="form-control" placeholder="Answer here...">
+			<span class="input-group-btn">
+				<button class="btn btn-default" type="submit">New Answer</button>
+			</span>
+		</div>
+	</form>
+	{{/if}}
+	
+	<hr>
+	
+	{{#each question.answers}}
+	<div class="row">
+		<div class="col-md-8">
+			<h1>{{answer}}</h1>
+			
+			{{#equal ../user.id user.id}}
+			<a class="btn btn-xs btn-danger" href="/question/answer/delete/{{id}}/{{../question.id}}">delete</a>
+			{{/equal}}
+			
+			{{#unless correct}}
+			{{#equal ../user.id ../question.question.user.id}}
+			<a class="btn btn-xs btn-info" href="/question/answer/right/{{id}}/{{../question.id}}">correct</a>
+			{{/equal}}
+			{{/unless}}
+		</div>
+		
+		<div class="col-md-4">
+			<br>
+			<div class="col-md-6">
+				<p class="lead">
+					<a href="/profile/{{user.username}}">{{user.username}}</a>
+				</p>
+			</div>
+			<div class="col-md-6">
+				{{#if correct}}
+				{{#equal ../user.id ../question.question.user.id}}
+				<a class="btn btn-primary btn-m" href="/question/answer/wrong/{{id}}/{{../question.id}}">
+					correct
+					<span class="glyphicon glyphicon-remove"></span>
+				</a>
+				{{else}}
+				<p class="lead">
+					<span class="label label-primary">
+						correct
+					</span>
+				</p>
+				{{/equal}}
+				{{/if}}
+			</div>
+		</div>
+	</div>
+	{{else}}
+	<div class="row">
+		<div class="col-md-12">
+			<h5>No answers yet! Check back later or add your own.</h5>
+		</div>	
+	</div>
+	
+	{{/each}}
+	
+</div>

@@ -1,0 +1,18 @@
+<div class="container">
+	<div class="page-header">
+		<h1>@{{account.username}}</h1>
+	</div>
+	
+	<h3>Questions</h3>
+	
+	<div class="list-group">
+			{{#each question}}
+			<a href="/question/view/{{id}}" class="list-group-item">
+				<span class="badge">{{answers.length}}</span>
+				<b>{{question.content}}</b>
+			</a>
+			{{else}}
+			<div class="list-group-item">none yet, add one!</div>
+			{{/each}}
+			</div>
+	</div>

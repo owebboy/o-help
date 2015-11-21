@@ -1,0 +1,59 @@
+<div class="container">
+  {{#unless user}}
+  <!-- no user -->
+  <br>
+  <div class="jumbotron">
+    <h1>{{title}}</h1>
+    <a class="btn btn-primary btn-lg" href="/auth/login">login</a>
+    <a class="btn btn-default btn-lg" href="/auth/register">register</a>
+  </div>
+  {{else}}
+  <!-- user -->
+  
+  {{#equal type 'questions'}}
+  <h1>{{topic.topic}}</h1>
+  
+  <br>
+  <ol class="breadcrumb">
+    <li><a href="/">Topics</a></li>
+    <li class="active">{{topic.topic}}</li>
+  </ol>
+  
+  <h3>New Question</h3>
+  <form action="/question/new" method="post">
+    <div class="input-group input-group-lg">
+      <input type="text" name="content" class="form-control" placeholder="Ask question here...">
+      <input name="topic" type="hidden" value="{{topic.id}}">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="submit">New Question</button>
+      </span>
+    </div>
+  </form>
+  {{else}}
+  
+  <div class="page-header">
+    <h1>Topics <small>{{#if user.admin}}<a href="/topic/admin">edit topics</a>{{/if}}</small></h1>
+  </div>
+  {{/equal}}
+  
+  <br>
+  
+  <div class="list-group">
+    {{#each question}}
+    {{#equal ../type 'questions'}}
+    <a href="/question/view/{{id}}" class="list-group-item">
+      <span class="badge">{{answers.length}}</span>
+      <b>{{question.content}}</b>
+    </a>
+    {{else}}
+    <a href="/topic/{{id}}" class="list-group-item">
+      <span class="lead">{{topic}}</span>
+    </a>
+    {{/equal}}
+    {{else}}
+    <div class="list-group-item">none yet, add one!</div>
+    {{/each}}
+  </div>
+  
+  {{/unless}}
+</div>

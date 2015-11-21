@@ -1,0 +1,79 @@
+<div class="container">
+	
+	<div class="row">
+		
+		<div class="col-md-6">
+			
+			<div class="page-header">
+				<h1>Topics</h1>
+			</div>
+			
+			<h3>New Topic</h3>
+			<form action="/topic/admin/new" method="post">
+				<div class="input-group input-group-lg">
+					<input type="text" name="content" class="form-control" placeholder="Topic name...">
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="submit">New Topic</button>
+					</span>
+				</div>
+			</form>
+			
+			<h3>Update Current Topics</h3>
+			
+			<div class="list-group">
+				
+				{{#each topic}}
+				<div class="list-group-item">
+					<form action="/topic/admin/update/{{id}}" method="post">
+						<div class="input-group input-group-lg">
+							<input type="text" name="content" class="form-control" placeholder="Edit Topic" value="{{topic}}">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="submit">Update</button>
+								<a class="btn btn-default" href="/topic/admin/delete/{{id}}"><span class="glyphicon glyphicon-remove"></span></a>
+							</span>
+						</div>
+					</form>
+				</div>
+				{{/each}}
+				
+			</div>
+			
+		</div>
+		
+		<div class="col-md-6">
+			
+			<div class="page-header">
+				<h1>Admins</h1>
+			</div>
+			
+			<h3>New Admin</h3>
+			<form action="/topic/admin/add" method="get">
+				<div class="input-group input-group-lg">
+					<input type="text" name="content" class="form-control" placeholder="New Admin's username...">
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="submit">Set as admin</button>
+					</span>
+				</div>
+			</form>
+			
+			<h3>Current Admins</h3>
+			
+			<div class="list-group">
+				
+				{{#each account}}
+				<div class="list-group-item">
+					{{username}}
+					
+					<div class="pull-right">
+						<a href="/topic/admin/remove/{{id}}"><span class="glyphicon glyphicon-remove"></span></a>
+					</div>
+				</div>
+				{{/each}}
+				
+			</div>
+			
+		</div>
+		
+	</div>
+	
+</div>
